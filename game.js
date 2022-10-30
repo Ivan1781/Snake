@@ -1,10 +1,6 @@
 let cvs = document.getElementById("game");
 let ctx = cvs.getContext("2d");
 
-let x = 50;
-let y = 50;
-
-
 let box = 8;
 let food = getRandomPosition();
 let snake = [];
@@ -18,18 +14,8 @@ let score=0;
 
 let dir;
 
-function mew(timestamp){
-    window.requestAnimationFrame(mew);
-    // if(x > 250){
-    //     console.log("ПЗДЦ");
-    // }
-    // ctx.clearRect(20, 20, cvs.width, cvs.height)
-    // ctx.beginPath();
-    // ctx.moveTo(x,y);
-    // x+=1;
-    // y+=1;
-    // ctx.lineTo(x,y);
-    // ctx.stroke();
+function play(timestamp){
+    window.requestAnimationFrame(play);
     ctx.clearRect(0, 0, cvs.width, cvs.height);
 
     ctx.fillRect(food.x, food.y, box, box);
@@ -41,18 +27,16 @@ function mew(timestamp){
 
     let snakeX=snake[0].x;
     let snakeY=snake[0].y;
-    let q = document.getElementById("ele");
+    let sc = document.getElementById("score");
 
     if(snakeX==food.x && snakeY==food.y){
         score++;
-        q.innerText = score;    
+        sc.innerText = score;    
         food=getRandomPosition();
     }
     else{
         snake.pop();
     }
-
-    
 
     if(dir == "left") snakeX -= 1;
     if(dir == "right") snakeX += 1;
@@ -103,8 +87,4 @@ function getRandomPosition(){
     }
 }
 
-function getRadians(degrees) {
-	return (Math.PI / 180) * degrees;
-}
-
-window.requestAnimationFrame(mew);
+window.requestAnimationFrame(play);
